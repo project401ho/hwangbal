@@ -1,35 +1,50 @@
 <template>
     <header class="header">
-        <div class="header-logo">
-            <img class="header-logo-img" alt="hwangbal logo" src="../assets/logo2.png">
-            <p>황금발란스</p>
-        </div>
-        <ul class="header-menu">
-            <li><a href="">검색</a></li>
-            <li><a href="">갤러리</a></li>
-            <li><a href="">명예의 전당</a></li>
-            <li><a href="">마이 페이지</a></li>
+        <router-link to="/">
+            <div class="header-logo">
+                <i class="fas fa-balance-scale"></i>
+                <p>황금발란스</p>
+            </div>
+        </router-link>
+
+        <ul class="header-menu" v-bind:class="{headerMenuActive: headerMenuActive}">
+            
+            <router-link to="/gallery"><li>갤러리</li></router-link>
+            <router-link to="/honors"><li>명예의 전당</li></router-link>
+            <router-link to="/mypage"><li>마이 페이지</li></router-link>
             
         </ul>
-        <div class="header-icons">
+        <div class="header-icons" v-bind:class="{headerMenuActive: headerMenuActive}">
             <li><i class="fab fa-twitter"></i></li>
             <li><i class="fab fa-facebook-f"></i></li>
             <li><i class="fab fa-instagram"></i></li>
-            
-            
-            
-
+        </div>
+        <div @click="toggleMenu()" class="header-menubar">
+            <i class="fas fa-bars"></i>
         </div>
     </header>
 </template>
 
 <script>
+
+
 export default {
-    
+    computed:{
+        headerMenuActive(){
+            return this.$store.state.headerMenuActive;
+        }
+    },
+    methods:{
+        toggleMenu(){
+            return this.$store.commit("TOGGLE_HEADER_MENU")
+        }
+    }
 }
+
 </script>
 
-<style>
+<style scoped>
+
 .header{
     background-color: rgb(47, 47, 78);
     color: rgb(226, 226, 226);
@@ -38,19 +53,31 @@ export default {
     align-items: center;
 }
 .header-logo{
-    display: flex;    
+    display: flex;
+    justify-content: space-between;
     align-items: center;
+    font-size: 2rem;   
+    width: 200px;    
+    padding-left: 20px;
 }
-.header-logo-img{
-    width: 100px;
-    height:100px;
-}
+
 .header-menu{
+    font-size: 1.3rem;   
+
     list-style: none;
     display: flex;
 }
 .header-menu li {
     padding: 8px 12px;
+}
+.header-menu li:hover{
+    background-color: rgb(240, 182, 76);
+    border-radius: 5px;
+
+}
+.header-menu li:hover > a {
+    color: rgb(24, 24, 24);
+   
 }
 .header-icons{
     list-style: none;
@@ -65,4 +92,59 @@ a {
     color: rgb(226, 226, 226);
 }
 
+.fab{
+    font-size: 1.5rem;
+}
+.header-menubar{
+    display: none;
+}
+@media screen and (max-width: 650px){
+    
+    .header{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .header-menu{
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        padding: 0px;
+        width: 100%;
+        font-size: 2rem;
+
+    }
+    .header-menu li {
+        border-bottom: 2px solid gray;
+    }   
+    .header-menu a {
+        padding: 0px;
+        padding: 0px;
+        width:100%;
+        text-align: center;
+        margin: 5px;
+    }
+
+    
+    .header-icons{
+        display:none;
+        flex-direction: row;
+        width:100%;
+        justify-content: center;
+
+    }
+    .header-menubar{
+        display: block;
+        position: absolute;
+        padding: 8px 8px;
+        font-size: 1.5rem;
+        right: 20px;
+        top:25px;
+    }
+    .headerMenuActive{
+        display: flex;
+
+    }
+    
+}
 </style>
