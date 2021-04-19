@@ -51,6 +51,10 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+}
+.header p{
+    margin:12px;
 }
 .header-logo{
     display: flex;
@@ -63,9 +67,9 @@ export default {
 
 .header-menu{
     font-size: 1.3rem;   
-
     list-style: none;
     display: flex;
+    margin:12px;
 }
 .header-menu li {
     padding: 8px 12px;
@@ -98,7 +102,7 @@ a {
 .header-menubar{
     display: none;
 }
-@media screen and (max-width: 650px){
+@media screen and (max-width: 715px){
     
     .header{
         flex-direction: column;
@@ -139,7 +143,7 @@ a {
         padding: 8px 8px;
         font-size: 1.5rem;
         right: 20px;
-        top:25px;
+        top:10px;
     }
     .headerMenuActive{
         display: flex;
